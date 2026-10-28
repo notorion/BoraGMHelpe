@@ -1,0 +1,113 @@
+diff --git dist/game/data/scripts/handlers/items/ItemSkillsTemplate.java dist/game/data/scripts/handlers/items/ItemSkillsTemplate.java
+index 6e8749b94c1..a59f011324a 100644
+--- dist/game/data/scripts/handlers/items/ItemSkillsTemplate.java
++++ dist/game/data/scripts/handlers/items/ItemSkillsTemplate.java
+@@ -67,6 +67,26 @@ public class ItemSkillsTemplate implements IItemHandler
+ 			return false;
+ 		}
+ 		
++		// Pre-check if any buff skill of the item is blocked or has a superior buff active.
++		for (SkillHolder skillInfo : skills)
++		{
++			if (skillInfo != null)
++			{
++				final Skill itemSkill = skillInfo.getSkill();
++				if ((itemSkill != null) && (itemSkill.getAbnormalType() != null) && !itemSkill.getAbnormalType().isNone())
++				{
++					if (playable.getEffectList().getBlockedAbnormalTypes().contains(itemSkill.getAbnormalType()) //
++						|| playable.getEffectList().hasAbnormalType(itemSkill.getAbnormalType(), info -> info.getSkill().getAbnormalLevel() > itemSkill.getAbnormalLevel()))
++					{
++						final SystemMessage sm = new SystemMessage(SystemMessageId.S1_CANNOT_BE_USED_THE_REQUIREMENTS_ARE_NOT_MET);
++						sm.addSkillName(itemSkill);
++						playable.sendPacket(sm);
++						return false;
++					}
++				}
++			}
++		}
++		
+ 		boolean hasConsumeSkill = false;
+ 		boolean successfulUse = false;
+ 		for (SkillHolder skillInfo : skills)
+diff --git dist/game/data/scripts/handlers/skill/effects/BlockAbnormalSlot.java dist/game/data/scripts/handlers/skill/effects/BlockAbnormalSlot.java
+index deb22363fb4..f150df7bb95 100644
+--- dist/game/data/scripts/handlers/skill/effects/BlockAbnormalSlot.java
++++ dist/game/data/scripts/handlers/skill/effects/BlockAbnormalSlot.java
+@@ -23,6 +23,7 @@ import org.l2jmobius.gameserver.entity.actor.Creature;
+ import org.l2jmobius.gameserver.entity.item.instance.Item;
+ import org.l2jmobius.gameserver.mechanics.effects.AbstractEffect;
+ import org.l2jmobius.gameserver.mechanics.skill.AbnormalType;
++import org.l2jmobius.gameserver.mechanics.skill.BuffInfo;
+ import org.l2jmobius.gameserver.mechanics.skill.Skill;
+ import org.l2jmobius.gameserver.util.StatSet;
+ 
+@@ -45,6 +46,11 @@ public class BlockAbnormalSlot extends AbstractEffect
+ 		}
+ 	}
+ 	
++	public Set<AbnormalType> getBlockAbnormalSlots()
++	{
++		return _blockAbnormalSlots;
++	}
++	
+ 	@Override
+ 	public void onStart(Creature effector, Creature effected, Skill skill, Item item)
+ 	{
+@@ -54,6 +60,32 @@ public class BlockAbnormalSlot extends AbstractEffect
+ 	@Override
+ 	public void onExit(Creature effector, Creature effected, Skill skill)
+ 	{
+-		effected.getEffectList().removeBlockedAbnormalTypes(_blockAbnormalSlots);
++		if ((effected == null) || (effected.getEffectList() == null))
++		{
++			return;
++		}
++		
++		final Set<AbnormalType> stillBlocked = EnumSet.noneOf(AbnormalType.class);
++		for (BuffInfo info : effected.getEffectList().getEffects())
++		{
++			if ((info == null) || (info.getSkill() == null) || (info.getSkill() == skill))
++			{
++				continue;
++			}
++			for (AbstractEffect effect : info.getEffects())
++			{
++				if (effect instanceof BlockAbnormalSlot)
++				{
++					stillBlocked.addAll(((BlockAbnormalSlot) effect).getBlockAbnormalSlots());
++				}
++			}
++		}
++		
++		final Set<AbnormalType> toRemove = EnumSet.copyOf(_blockAbnormalSlots);
++		toRemove.removeAll(stillBlocked);
++		if (!toRemove.isEmpty())
++		{
++			effected.getEffectList().removeBlockedAbnormalTypes(toRemove);
++		}
+ 	}
+ }
+diff --git dist/game/data/stats/skills/29400-29499.xml dist/game/data/stats/skills/29400-29499.xml
+index 18a2cbdc527..81f82b5af0b 100644
+--- dist/game/data/stats/skills/29400-29499.xml
++++ dist/game/data/stats/skills/29400-29499.xml
+@@ -226,6 +226,7 @@
+ 		<targetType>SELF</targetType>
+ 		<abnormalLevel>7</abnormalLevel>
+ 		<abnormalTime>3600</abnormalTime>
++		<abnormalType>COCKTAIL</abnormalType>
+ 		<affectScope>SINGLE</affectScope>
+ 		<basicProperty>NONE</basicProperty>
+ 		<blockedInOlympiad>true</blockedInOlympiad>
+diff --git dist/game/data/stats/skills/29600-29699.xml dist/game/data/stats/skills/29600-29699.xml
+index 5a6505235d7..054351f852c 100644
+--- dist/game/data/stats/skills/29600-29699.xml
++++ dist/game/data/stats/skills/29600-29699.xml
+@@ -1274,6 +1274,7 @@
+ 		<targetType>SELF</targetType>
+ 		<abnormalLevel>7</abnormalLevel>
+ 		<abnormalTime>3600</abnormalTime>
++		<abnormalType>COCKTAIL</abnormalType>
+ 		<affectScope>SINGLE</affectScope>
+ 		<basicProperty>NONE</basicProperty>
+ 		<blockedInOlympiad>true</blockedInOlympiad>

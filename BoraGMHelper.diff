@@ -1,0 +1,989 @@
+diff --git dist/game/data/html/admin/bora_helper.htm dist/game/data/html/admin/bora_helper.htm
+new file mode 100644
+index 00000000000..8b61598361a
+--- /dev/null
++++ dist/game/data/html/admin/bora_helper.htm
+@@ -0,0 +1,56 @@
++<html><title>Bora GM Helper Manager</title><body>
++<center>
++<table width=270 border=0 bgcolor="444444">
++<tr>
++<td><button value="Main" action="bypass admin_admin" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="Char" action="bypass admin_admin6" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="Game" action="bypass admin_admin2" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="GM" action="bypass admin_admin7" width=65 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++</tr>
++</table>
++<br>
++<font color="LEVEL">Bora GM Helper Control Panel</font><br1>
++<table width=270>
++<tr><td>Status:</td><td><font color="%status_color%">%status%</font></td></tr>
++<tr><td>Duration Left:</td><td><font color="00FF00">%duration_left%</font></td></tr>
++<tr><td>Buff Tier:</td><td><font color="LEVEL">%buff_tier_desc%</font></td></tr>
++<tr><td>Location:</td><td>Giran Center (83093, 148623, -3400)</td></tr>
++</table>
++<br1>
++<table width=270>
++<tr>
++<td><button value="Goto Bora" action="bypass -h admin_bora goto" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="Despawn" action="bypass -h admin_bora despawn" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++</tr>
++</table>
++<br1>
++Spawn Bora (Giran Center):<br1>
++<table width=270>
++<tr>
++<td><button value="Permanent (Restart)" action="bypass -h admin_bora spawn 0" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="1 Hour" action="bypass -h admin_bora spawn 1" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++</tr>
++<tr>
++<td><button value="2 Hours" action="bypass -h admin_bora spawn 2" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="4 Hours" action="bypass -h admin_bora spawn 4" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++</tr>
++<tr>
++<td><button value="8 Hours" action="bypass -h admin_bora spawn 8" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="12 Hours" action="bypass -h admin_bora spawn 12" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++</tr>
++<tr>
++<td><button value="24 Hours" action="bypass -h admin_bora spawn 24" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="Refresh" action="bypass -h admin_bora" width=130 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++</tr>
++</table>
++<br1>
++Select Buffs Tier Delivered by Bora:<br1>
++<table width=270>
++<tr>
++<td><button value="60 min (Lv 1)" action="bypass -h admin_bora tier 1" width=85 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="4 hours (Lv 2)" action="bypass -h admin_bora tier 2" width=85 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++<td><button value="8 hours (Lv 3)" action="bypass -h admin_bora tier 3" width=85 height=22 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
++</tr>
++</table>
++</center>
++</body></html>
+diff --git dist/game/data/scripts/custom/BoraGMHelper/34502-1.htm dist/game/data/scripts/custom/BoraGMHelper/34502-1.htm
+new file mode 100644
+index 00000000000..5dc90fba70a
+--- /dev/null
++++ dist/game/data/scripts/custom/BoraGMHelper/34502-1.htm
+@@ -0,0 +1,9 @@
++<html><body>GM Helper Bora:<br>
++(These butlers... They don't even understand cat language... Tsk!)<br>
++Hm... Hello! I'm Bora, and I love my butlers.<br>
++I came to Aden to give a buff in place of my butler GM.<br>
++I'm pretty busy kneading, so I don't have much time.<br>
++So come at the right time!<br>
++<Button ALIGN=LEFT ICON="NORMAL" action="bypass -h Script BoraGMHelper page3">Receive the Master's Blessing buff (%buff_duration%).</Button>
++<Button ALIGN=LEFT ICON="RETURN" action="bypass -h Script BoraGMHelper page1">Back</Button>
++</body></html>
+diff --git dist/game/data/scripts/custom/BoraGMHelper/34502-2.htm dist/game/data/scripts/custom/BoraGMHelper/34502-2.htm
+new file mode 100644
+index 00000000000..8e404cd9f10
+--- /dev/null
++++ dist/game/data/scripts/custom/BoraGMHelper/34502-2.htm
+@@ -0,0 +1,15 @@
++<html><body>GM Helper Bora:<br>
++These are the buffs I've prepared! Do you like the buffs full with my love?<br1>
++<font color="LEVEL">- Fever Melody - Bora</font><br1>
++<font color="LEVEL">- Drumbeat of Serenity - Bora</font><br1>
++<font color="LEVEL">- Fantasia Harmony - Bora</font><br1>
++<font color="ee706a">- Noblesse Blessing</font><br1>
++<font color="ee706a">- Santiago's Royal Soup - Bora</font><br1>
++
++However, there's one thing you must be aware of, meow! If you receive a new buff while the <font color="ee706a">Celestial Cocktail</font> buff is in effect, only <font color="ee706a">Noblesse Blessing</font> and <font color="ee706a">Santiago's Royal Soup - Bora</font> will apply, meow! Make sure to double check before receiving the buff, meow!<br1>
++But if you have the <font color="LEVEL">Special Cocktail</font> buff, all existing buff will be removed and replaced with the buffs above, meow!<br1>
++
++<Button ALIGN=LEFT ICON="NORMAL" action="bypass -h Script BoraGMHelper give_buffs">Receive the Master's Blessing.</Button><br1>
++<Button ALIGN=LEFT ICON="RETURN" action="bypass -h Script BoraGMHelper page2">Back</Button>
++
++</body></html>
+diff --git dist/game/data/scripts/custom/BoraGMHelper/34502.htm dist/game/data/scripts/custom/BoraGMHelper/34502.htm
+new file mode 100644
+index 00000000000..21f5d7c954c
+--- /dev/null
++++ dist/game/data/scripts/custom/BoraGMHelper/34502.htm
+@@ -0,0 +1,8 @@
++<html><body>GM Helper Bora:<br>
++Meow! Meowww!<br>
++.<br>
++.<br>
++.<br>
++(Can't tell what Bora is saying..)<br>
++<Button ALIGN=LEFT ICON="NORMAL" action="bypass -h Script BoraGMHelper page2">Ask Bora to speak in butler language.</Button>
++</body></html>
+diff --git dist/game/data/scripts/custom/BoraGMHelper/BoraGMHelper.java dist/game/data/scripts/custom/BoraGMHelper/BoraGMHelper.java
+new file mode 100644
+index 00000000000..326a68ae12a
+--- /dev/null
++++ dist/game/data/scripts/custom/BoraGMHelper/BoraGMHelper.java
+@@ -0,0 +1,475 @@
++/*
++ * Copyright (c) 2013 L2jMobius
++ * 
++ * Permission is hereby granted, free of charge, to any person obtaining a copy
++ * of this software and associated documentation files (the "Software"), to deal
++ * in the Software without restriction, including without limitation the rights
++ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++ * copies of the Software, and to permit persons to whom the Software is
++ * furnished to do so, subject to the following conditions:
++ * 
++ * The above copyright notice and this permission notice shall be
++ * included in all copies or substantial portions of the Software.
++ * 
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
++ * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++ */
++package custom.BoraGMHelper;
++
++import java.util.StringTokenizer;
++import java.util.concurrent.ScheduledFuture;
++
++import org.l2jmobius.commons.threads.ThreadPool;
++import org.l2jmobius.gameserver.cache.HtmCache;
++import org.l2jmobius.gameserver.data.xml.SkillData;
++import org.l2jmobius.gameserver.entity.Location;
++import org.l2jmobius.gameserver.entity.World;
++import org.l2jmobius.gameserver.entity.actor.Creature;
++import org.l2jmobius.gameserver.entity.actor.Npc;
++import org.l2jmobius.gameserver.entity.actor.Player;
++import org.l2jmobius.gameserver.handler.AdminCommandHandler;
++import org.l2jmobius.gameserver.handler.IAdminCommandHandler;
++import org.l2jmobius.gameserver.mechanics.script.Script;
++import org.l2jmobius.gameserver.mechanics.skill.AbnormalType;
++import org.l2jmobius.gameserver.mechanics.skill.Skill;
++import org.l2jmobius.gameserver.mechanics.skill.SkillCastingType;
++import org.l2jmobius.gameserver.network.serverpackets.MagicSkillLaunched;
++import org.l2jmobius.gameserver.network.serverpackets.MagicSkillUse;
++import org.l2jmobius.gameserver.network.serverpackets.NpcHtmlMessage;
++
++/**
++ * Bora GM Helper Support NPC
++ * Official retail recreation based on European skill definitions.
++ * @author Notorion
++ */
++public class BoraGMHelper extends Script implements IAdminCommandHandler
++{
++	// NPC ID
++	private static final int BORA_NPC_ID = 34502;
++	
++	// Location: Giran Town Center (heading 32768 faces forward towards players)
++	private static final Location BORA_LOC = new Location(83093, 148623, -3400, 32768);
++	
++	// Configuration: message sent to player upon receiving buffs (retail official: false/disabled)
++	private static final boolean ENABLE_BUFF_MESSAGE = false;
++	
++	// Buff Skill IDs
++	private static final int FEVER_MELODY = 62084;
++	private static final int DRUMBEAT_OF_SERENITY = 62085;
++	private static final int FANTASIA_HARMONY = 62086;
++	private static final int NOBLESSE_BLESSING = 32788;
++	private static final int SANTIAGO_ROYAL_SOUP = 34413;
++	
++	private static final String[] ADMIN_COMMANDS =
++	{
++		"admin_bora",
++		"admin_bora_helper"
++	};
++	
++	// Runtime state
++	private static Npc _boraNpc = null;
++	private static int _buffTier = 3; // Default 8 hours (Lv 3)
++	private static long _despawnTime = 0; // Timestamp for despawn (0 = permanent until restart)
++	private static ScheduledFuture<?> _despawnTask = null;
++	
++	private BoraGMHelper()
++	{
++		// Only register first talk (do NOT register as quest start/talk to avoid quest sound and quest icon)
++		addFirstTalkId(BORA_NPC_ID);
++		
++		AdminCommandHandler.getInstance().registerHandler(this);
++	}
++	
++	@Override
++	public String onFirstTalk(Npc npc, Player player)
++	{
++		return "34502.htm";
++	}
++	
++	@Override
++	public String onEvent(String event, Npc npc, Player player)
++	{
++		if (player == null)
++		{
++			return null;
++		}
++		
++		switch (event)
++		{
++			case "page1":
++			{
++				return "34502.htm";
++			}
++			case "page2":
++			{
++				String html = getHtm(player, "34502-1.htm");
++				if (html != null)
++				{
++					html = html.replace("%buff_duration%", getBuffDurationString());
++				}
++				return html;
++			}
++			case "page3":
++			{
++				return "34502-2.htm";
++			}
++			case "give_buffs":
++			{
++				applyBuffs(npc, player);
++				
++				// Optional message for retail official accuracy (disabled by default)
++				if (ENABLE_BUFF_MESSAGE)
++				{
++					player.sendMessage("Bora: May the Master's Blessing accompany your journey, meow!");
++				}
++				return null;
++			}
++		}
++		
++		return null;
++	}
++	
++	private void applyBuffs(Npc npc, Player player)
++	{
++		final int tier = _buffTier;
++		
++		// Apply buffs to player according to retail rule
++		giveBoraBuffsToCreature(npc, player, tier);
++		
++		// Also apply to player's summons / pet if present
++		if (player.hasPet())
++		{
++			giveBoraBuffsToCreature(npc, player.getPet(), tier);
++		}
++		
++		if (!player.getServitors().isEmpty())
++		{
++			for (Creature servitor : player.getServitors().values())
++			{
++				giveBoraBuffsToCreature(npc, servitor, tier);
++			}
++		}
++		
++		// Visual effect on NPC casting and impact on player and surrounding viewers
++		if (npc != null)
++		{
++			npc.broadcastPacket(new MagicSkillUse(npc, player, FANTASIA_HARMONY, tier, 500, 0));
++			npc.broadcastPacket(new MagicSkillLaunched(npc, FANTASIA_HARMONY, tier, SkillCastingType.NORMAL, player));
++		}
++		player.sendPacket(new MagicSkillUse(npc, player, FANTASIA_HARMONY, tier, 500, 0));
++		player.sendPacket(new MagicSkillLaunched(npc, FANTASIA_HARMONY, tier, SkillCastingType.NORMAL, player));
++		player.sendPacket(new MagicSkillLaunched(player, FANTASIA_HARMONY, tier, SkillCastingType.NORMAL, player));
++		player.broadcastPacket(new MagicSkillLaunched(player, FANTASIA_HARMONY, tier, SkillCastingType.NORMAL, player));
++	}
++	
++	private boolean hasCelestialCocktail(Creature creature)
++	{
++		if ((creature == null) || (creature.getEffectList() == null))
++		{
++			return false;
++		}
++		
++		return creature.getEffectList().isAffectedBySkill(22928) // Heavenly / Celestial Cocktail
++			|| creature.getEffectList().isAffectedBySkill(23764)
++			|| creature.getEffectList().isAffectedBySkill(34082)
++			|| creature.getEffectList().isAffectedBySkill(34620)
++			|| creature.getEffectList().isAffectedBySkill(39760)
++			|| creature.getEffectList().isAffectedBySkill(46178);
++	}
++	
++	private void giveBoraBuffsToCreature(Npc npc, Creature creature, int tier)
++	{
++		if (creature == null)
++		{
++			return;
++		}
++		
++		if (hasCelestialCocktail(creature))
++		{
++			// Retail rule: Celestial Cocktail is preserved! Only Noblesse Blessing and Santiago's Royal Soup apply.
++			applySkill(npc, creature, NOBLESSE_BLESSING, 1);
++			applySkill(npc, creature, SANTIAGO_ROYAL_SOUP, tier);
++		}
++		else
++		{
++			// Retail rule: Special Cocktail and all existing buffs are removed and replaced with all 5 Bora buffs.
++			removeOldBuffs(creature);
++			applySkill(npc, creature, FEVER_MELODY, tier);
++			applySkill(npc, creature, DRUMBEAT_OF_SERENITY, tier);
++			applySkill(npc, creature, FANTASIA_HARMONY, tier);
++			applySkill(npc, creature, NOBLESSE_BLESSING, 1);
++			applySkill(npc, creature, SANTIAGO_ROYAL_SOUP, tier);
++		}
++	}
++	
++	private void removeOldBuffs(Creature creature)
++	{
++		if ((creature == null) || (creature.getEffectList() == null))
++		{
++			return;
++		}
++		
++		creature.getEffectList().stopEffects(info ->
++		{
++			final Skill skill = info.getSkill();
++			if (skill == null)
++			{
++				return false;
++			}
++			
++			// Never remove Bora's own skills
++			final int id = skill.getId();
++			if ((id == FEVER_MELODY) || (id == DRUMBEAT_OF_SERENITY) || (id == FANTASIA_HARMONY) || (id == NOBLESSE_BLESSING) || (id == SANTIAGO_ROYAL_SOUP))
++			{
++				return false;
++			}
++			
++			// Remove Special Cocktail / common cocktails (e.g. 39890, 39891, 39892)
++			final String name = skill.getName();
++			if ((name != null) && (name.contains("Special Cocktail") || name.contains("Fruit Cocktail")))
++			{
++				return true;
++			}
++			
++			// Remove melody / harmony / song / dance abnormal types
++			final AbnormalType abnormalType = skill.getAbnormalType();
++			if ((abnormalType == AbnormalType.BUFF_SPECIAL_ATTACK) || (abnormalType == AbnormalType.BUFF_SPECIAL_AURA) || (abnormalType == AbnormalType.BUFF_SPECIAL_CLASS) || (abnormalType == AbnormalType.BUFF_SPECIAL_MULTI) || (abnormalType == AbnormalType.DITTY) || (abnormalType == AbnormalType.ARMOR_ELEMENT_ALL) || (abnormalType == AbnormalType.MULTI_BUFF) || (abnormalType == AbnormalType.COCKTAIL))
++			{
++				return true;
++			}
++			
++			return false;
++		}, true, true);
++	}
++	
++	private void applySkill(Npc npc, Creature target, int skillId, int level)
++	{
++		final Skill skill = SkillData.getInstance().getSkill(skillId, level);
++		if (skill != null)
++		{
++			skill.applyEffects(npc, target);
++		}
++	}
++	
++	private String getBuffDurationString()
++	{
++		switch (_buffTier)
++		{
++			case 1:
++			{
++				return "60-min";
++			}
++			case 2:
++			{
++				return "4-hr";
++			}
++			case 3:
++			default:
++			{
++				return "8-hr";
++			}
++		}
++	}
++	
++	@Override
++	public boolean onCommand(String command, Player activeChar)
++	{
++		if (!activeChar.isGM())
++		{
++			return false;
++		}
++		
++		final StringTokenizer st = new StringTokenizer(command, " ");
++		st.nextToken(); // skip command name (admin_bora / admin_bora_helper)
++		final String action = st.hasMoreTokens() ? st.nextToken() : "menu";
++		
++		switch (action.toLowerCase())
++		{
++			case "spawn":
++			{
++				int hours = 0;
++				if (st.hasMoreTokens())
++				{
++					try
++					{
++						hours = Integer.parseInt(st.nextToken());
++					}
++					catch (NumberFormatException e)
++					{
++						hours = 0;
++					}
++				}
++				
++				spawnBora(hours, activeChar);
++				showAdminMenu(activeChar);
++				break;
++			}
++			case "despawn":
++			{
++				despawnBora();
++				activeChar.sendMessage("Bora GM Helper has been despawned.");
++				showAdminMenu(activeChar);
++				break;
++			}
++			case "tier":
++			{
++				if (st.hasMoreTokens())
++				{
++					try
++					{
++						final int tier = Integer.parseInt(st.nextToken());
++						_buffTier = Math.max(1, Math.min(3, tier));
++						activeChar.sendMessage("Bora buff tier set to Level " + _buffTier + " (" + getBuffDurationString() + ").");
++					}
++					catch (NumberFormatException e)
++					{
++						activeChar.sendMessage("Invalid tier: 1 (60-min), 2 (4-hr), or 3 (8-hr).");
++					}
++				}
++				showAdminMenu(activeChar);
++				break;
++			}
++			case "goto":
++			{
++				activeChar.teleToLocation(BORA_LOC);
++				activeChar.sendMessage("Teleported to Bora GM Helper location.");
++				showAdminMenu(activeChar);
++				break;
++			}
++			case "menu":
++			default:
++			{
++				showAdminMenu(activeChar);
++				break;
++			}
++		}
++		
++		return true;
++	}
++	
++	private synchronized void spawnBora(int hours, Player gm)
++	{
++		despawnBora();
++		
++		_boraNpc = addSpawn(BORA_NPC_ID, BORA_LOC.getX(), BORA_LOC.getY(), BORA_LOC.getZ(), BORA_LOC.getHeading(), false, 0);
++		
++		if (hours > 0)
++		{
++			final long despawnDelayMs = hours * 3600 * 1000L;
++			_despawnTime = System.currentTimeMillis() + despawnDelayMs;
++			_despawnTask = ThreadPool.schedule(() ->
++			{
++				despawnBora();
++			}, despawnDelayMs);
++		}
++		else
++		{
++			_despawnTime = 0;
++			_despawnTask = null;
++		}
++		
++		// Announcement in English to all online players
++		World.broadcastToAllOnlinePlayers("[Announcement] Support NPC Bora (GM Helper) has appeared in the center of Giran! Come get your buffs!", false);
++		
++		if (gm != null)
++		{
++			gm.sendMessage("Bora GM Helper has been spawned at Giran Center for " + (hours > 0 ? (hours + " hour(s).") : "permanent (until restart)."));
++		}
++	}
++	
++	private synchronized void despawnBora()
++	{
++		if (_despawnTask != null)
++		{
++			_despawnTask.cancel(false);
++			_despawnTask = null;
++		}
++		
++		_despawnTime = 0;
++		
++		if (_boraNpc != null)
++		{
++			_boraNpc.deleteMe();
++			_boraNpc = null;
++		}
++	}
++	
++	private void showAdminMenu(Player player)
++	{
++		String content = HtmCache.getInstance().getHtm(player, "data/html/admin/bora_helper.htm");
++		if (content == null)
++		{
++			player.sendMessage("Error: data/html/admin/bora_helper.htm not found!");
++			return;
++		}
++		
++		final boolean isSpawned = (_boraNpc != null) && !_boraNpc.isDecayed() && _boraNpc.isSpawned();
++		content = content.replace("%status%", isSpawned ? "Spawned (Online)" : "Not Spawned (Offline)");
++		content = content.replace("%status_color%", isSpawned ? "00FF00" : "FF0000");
++		
++		String durationLeft = "None";
++		if (isSpawned)
++		{
++			if (_despawnTime == 0)
++			{
++				durationLeft = "Permanent (Until Restart)";
++			}
++			else
++			{
++				final long remaining = _despawnTime - System.currentTimeMillis();
++				if (remaining > 0)
++				{
++					final long hours = remaining / 3600000;
++					final long minutes = (remaining % 3600000) / 60000;
++					durationLeft = hours + "h " + minutes + "m";
++				}
++				else
++				{
++					durationLeft = "Expiring...";
++				}
++			}
++		}
++		content = content.replace("%duration_left%", durationLeft);
++		
++		String tierDesc;
++		switch (_buffTier)
++		{
++			case 1:
++			{
++				tierDesc = "60 Minutes (Lv 1)";
++				break;
++			}
++			case 2:
++			{
++				tierDesc = "4 Hours (Lv 2)";
++				break;
++			}
++			case 3:
++			default:
++			{
++				tierDesc = "8 Hours (Lv 3 - Default)";
++				break;
++			}
++		}
++		content = content.replace("%buff_tier_desc%", tierDesc);
++		
++		final NpcHtmlMessage html = new NpcHtmlMessage(0, 1);
++		html.setHtml(content);
++		player.sendPacket(html);
++	}
++	
++	@Override
++	public String[] getCommandList()
++	{
++		return ADMIN_COMMANDS;
++	}
++	
++	public static void main(String[] args)
++	{
++		new BoraGMHelper();
++	}
++}
+diff --git dist/game/data/stats/skills/62000-62099.xml dist/game/data/stats/skills/62000-62099.xml
+index e562c254711..674ed11a4aa 100644
+--- dist/game/data/stats/skills/62000-62099.xml
++++ dist/game/data/stats/skills/62000-62099.xml
+@@ -1582,31 +1582,385 @@
+ 		<reuseDelay>1000</reuseDelay>
+ 	</skill>
+ 	<skill id="62084" toLevel="3" name="Fever Melody - Bora">
+-		<!-- Level 1: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">60 min.</font>. P. Atk. +115%. M. Atk. +300%. Attribute Attack +100. Atk. Spd. +150%. Casting Spd. +140%. Critical Rate for basic attacks +170%. M. Skill Critical Rate +110%. Critical Damage for basic attacks +150%. P./ M. Skill Critical Damage 60 min.0 -->
+-		<!-- Level 2: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">4 h.</font>. P. Atk. +115%. M. Atk. +300%. Attribute Attack +100. Atk. Spd. +150%. Casting Spd. +140%. Critical Rate for basic attacks +170%. M. Skill Critical Rate +110%. Critical Damage for basic attacks +150%. P./ M. Skill Critical Damage 4 h.0 -->
+-		<!-- Level 3: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">8 h.</font>. P. Atk. +115%. M. Atk. +300%. Attribute Attack +100. Atk. Spd. +150%. Casting Spd. +140%. Critical Rate for basic attacks +170%. M. Skill Critical Rate +110%. Critical Damage for basic attacks +150%. P./ M. Skill Critical Damage 8 h.0 -->
++		<!-- Level 1: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">60 min.</font>. P. Atk. +115%. M. Atk. +300%. Attribute Attack +100. Atk. Spd. +150%. Casting Spd. +140%. Critical Rate for basic attacks +170%. M. Skill Critical Rate +110%. Critical Damage for basic attacks +150%. P./ M. Skill Critical Damage +10% -->
++		<!-- Level 2: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">4 h.</font>. P. Atk. +115%. M. Atk. +300%. Attribute Attack +100. Atk. Spd. +150%. Casting Spd. +140%. Critical Rate for basic attacks +170%. M. Skill Critical Rate +110%. Critical Damage for basic attacks +150%. P./ M. Skill Critical Damage +10% -->
++		<!-- Level 3: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">8 h.</font>. P. Atk. +115%. M. Atk. +300%. Attribute Attack +100. Atk. Spd. +150%. Casting Spd. +140%. Critical Rate for basic attacks +170%. M. Skill Critical Rate +110%. Critical Damage for basic attacks +150%. P./ M. Skill Critical Damage +10% -->
+ 		<icon>icon.skill30991</icon>
+-		<operateType>A1</operateType>
++		<operateType>A2</operateType>
++		<targetType>SELF</targetType>
++		<abnormalLevel>
++			<value level="1">8</value>
++			<value level="2">9</value>
++			<value level="3">10</value>
++		</abnormalLevel>
++		<abnormalTime>
++			<value level="1">3600</value>
++			<value level="2">14400</value>
++			<value level="3">28800</value>
++		</abnormalTime>
++		<abnormalType>BUFF_SPECIAL_ATTACK</abnormalType>
++		<affectObject>FRIEND</affectObject>
++		<affectScope>SINGLE</affectScope>
++		<basicProperty>NONE</basicProperty>
++		<blockedInOlympiad>true</blockedInOlympiad>
+ 		<castRange>900</castRange>
+ 		<effectPoint>1</effectPoint>
++		<isMagic>22</isMagic>
++		<magicCriticalRate>5</magicCriticalRate>
++		<effects>
++			<effect name="DispelBySlotProbability">
++				<dispel>COCKTAIL;MULTI_BUFF;IMPROVE_PA_PD_UP;PA_UP;IMPROVE_MA_MD_UP;MD_UP;MA_UP;KAMAEL_SPECIAL;PD_UP;HIT_UP;IMPROVE_HIT_DEFENCE_CRT_RATE_UP;IMPROVE_CRT_RATE_DMG_UP;T_CRT_DMG_DOWN;CRITICAL_DMG_UP;CRITICAL_PROB_UP;IMPROVE_SPEED_AVOID_UP;SPEED_UP;MAX_BREATH_UP;HOLY_ATTACK;AVOID_UP;DECREASE_WEIGHT_PENALTY;RESIST_HOLY_UNHOLY;ATTACK_TIME_DOWN</dispel>
++				<rate>100</rate>
++			</effect>
++			<effect name="BlockAbnormalSlot">
++				<slot>COCKTAIL;MULTI_BUFF;IMPROVE_PA_PD_UP;PA_UP;IMPROVE_MA_MD_UP;MD_UP;MA_UP;KAMAEL_SPECIAL;PD_UP;HIT_UP;IMPROVE_HIT_DEFENCE_CRT_RATE_UP;IMPROVE_CRT_RATE_DMG_UP;T_CRT_DMG_DOWN;CRITICAL_DMG_UP;CRITICAL_PROB_UP;IMPROVE_SPEED_AVOID_UP;SPEED_UP;MAX_BREATH_UP;HOLY_ATTACK;AVOID_UP;DECREASE_WEIGHT_PENALTY;RESIST_HOLY_UNHOLY;ATTACK_TIME_DOWN</slot>
++			</effect>
++			<effect name="PhysicalAttack">
++				<amount>115</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MagicalAttack">
++				<amount>300</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="AttackAttribute">
++				<amount>100</amount>
++				<attribute>FIRE</attribute>
++			</effect>
++			<effect name="AttackAttribute">
++				<amount>100</amount>
++				<attribute>WATER</attribute>
++			</effect>
++			<effect name="AttackAttribute">
++				<amount>100</amount>
++				<attribute>WIND</attribute>
++			</effect>
++			<effect name="AttackAttribute">
++				<amount>100</amount>
++				<attribute>EARTH</attribute>
++			</effect>
++			<effect name="AttackAttribute">
++				<amount>100</amount>
++				<attribute>DARK</attribute>
++			</effect>
++			<effect name="AttackAttribute">
++				<amount>100</amount>
++				<attribute>HOLY</attribute>
++			</effect>
++			<effect name="PhysicalAttackSpeed">
++				<amount>150</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MagicalAttackSpeed">
++				<amount>140</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="CriticalRate">
++				<amount>170</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MagicCriticalRate">
++				<amount>110</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="CriticalDamage">
++				<amount>150</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="PhysicalSkillCriticalDamage">
++				<amount>10</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MagicCriticalDamage">
++				<amount>10</amount>
++				<mode>PER</mode>
++			</effect>
++		</effects>
+ 	</skill>
+ 	<skill id="62085" toLevel="3" name="Drumbeat of Serenity - Bora">
+ 		<!-- Level 1: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">60 min.</font>. Max HP/ MP/ CP +85%. P. Def. +95%. M. Def. +90%. Attribute Resistance +50. All received Critical Rate -25% -->
+ 		<!-- Level 2: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">4 h.</font>. Max HP/ MP/ CP +85%. P. Def. +95%. M. Def. +90%. Attribute Resistance +50. All received Critical Rate -25% -->
+ 		<!-- Level 3: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">8 h.</font>. Max HP/ MP/ CP +85%. P. Def. +95%. M. Def. +90%. Attribute Resistance +50. All received Critical Rate -25% -->
+ 		<icon>icon.skill31001</icon>
+-		<operateType>A1</operateType>
++		<operateType>A2</operateType>
++		<targetType>SELF</targetType>
++		<abnormalLevel>
++			<value level="1">8</value>
++			<value level="2">9</value>
++			<value level="3">10</value>
++		</abnormalLevel>
++		<abnormalTime>
++			<value level="1">3600</value>
++			<value level="2">14400</value>
++			<value level="3">28800</value>
++		</abnormalTime>
++		<abnormalType>BUFF_SPECIAL_AURA</abnormalType>
++		<affectObject>FRIEND</affectObject>
++		<affectScope>SINGLE</affectScope>
++		<basicProperty>NONE</basicProperty>
++		<blockedInOlympiad>true</blockedInOlympiad>
+ 		<castRange>900</castRange>
+ 		<effectPoint>1</effectPoint>
++		<isMagic>22</isMagic>
++		<magicCriticalRate>5</magicCriticalRate>
++		<effects>
++			<effect name="DispelBySlotProbability">
++				<dispel>COCKTAIL;DANCE_OF_BLADESTORM;SONG_OF_CHAMPION;SONG_OF_EARTH;SONG_OF_HUNTER;SONG_OF_LIFE;SONG_OF_MEDITATION;SONG_OF_RENEWAL;SONG_OF_VENGEANCE;SONG_OF_VITALITY;SONG_OF_WARDING;SONG_OF_WATER;SONG_OF_WIND;DANCE_OF_BERSERKER;DANCE_OF_CONCENTRATION;DANCE_OF_FIRE;DANCE_OF_FURY;DANCE_OF_INSPIRATION;DANCE_OF_MYSTIC;DANCE_OF_SIREN;DANCE_OF_VAMPIRE;DANCE_OF_WARRIOR;SONG_OF_PURIFICATION;WISPERING_OF_BATTLE;SONG_OF_WINDSTORM;MOTION_OF_DEFENCE;BUFF_UNICORN_SERAPHIM;BUFF_QUEEN_OF_CAT;KNIGHT_AURA;DMG_SHIELD;AVOID_UP</dispel>
++				<rate>100</rate>
++			</effect>
++			<effect name="BlockAbnormalSlot">
++				<slot>COCKTAIL;DANCE_OF_BLADESTORM;SONG_OF_CHAMPION;SONG_OF_EARTH;SONG_OF_HUNTER;SONG_OF_LIFE;SONG_OF_MEDITATION;SONG_OF_RENEWAL;SONG_OF_VENGEANCE;SONG_OF_VITALITY;SONG_OF_WARDING;SONG_OF_WATER;SONG_OF_WIND;DANCE_OF_BERSERKER;DANCE_OF_CONCENTRATION;DANCE_OF_FIRE;DANCE_OF_FURY;DANCE_OF_INSPIRATION;DANCE_OF_MYSTIC;DANCE_OF_SIREN;DANCE_OF_VAMPIRE;DANCE_OF_WARRIOR;SONG_OF_PURIFICATION;WISPERING_OF_BATTLE;SONG_OF_WINDSTORM;MOTION_OF_DEFENCE;BUFF_UNICORN_SERAPHIM;BUFF_QUEEN_OF_CAT;KNIGHT_AURA;DMG_SHIELD;AVOID_UP</slot>
++			</effect>
++			<effect name="MaxHp">
++				<amount>85</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MaxMp">
++				<amount>85</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MaxCp">
++				<amount>85</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="PhysicalDefence">
++				<amount>95</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MagicalDefence">
++				<amount>90</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefenceCriticalRate">
++				<amount>25</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefenceMagicCriticalRate">
++				<amount>25</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefencePhysicalSkillCriticalRate">
++				<amount>25</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefenceCriticalDamage">
++				<amount>25</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefenceMagicCriticalDamage">
++				<amount>25</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefencePhysicalSkillCriticalDamage">
++				<amount>25</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefenceAttribute">
++				<amount>50</amount>
++				<attribute>FIRE</attribute>
++			</effect>
++			<effect name="DefenceAttribute">
++				<amount>50</amount>
++				<attribute>WATER</attribute>
++			</effect>
++			<effect name="DefenceAttribute">
++				<amount>50</amount>
++				<attribute>WIND</attribute>
++			</effect>
++			<effect name="DefenceAttribute">
++				<amount>50</amount>
++				<attribute>EARTH</attribute>
++			</effect>
++			<effect name="DefenceAttribute">
++				<amount>50</amount>
++				<attribute>HOLY</attribute>
++			</effect>
++			<effect name="DefenceAttribute">
++				<amount>50</amount>
++				<attribute>DARK</attribute>
++			</effect>
++			<effect name="MaxHp">
++				<amount>30</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="PhysicalAttack">
++				<amount>30</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MagicalAttack">
++				<amount>33</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="PhysicalAttackSpeed">
++				<amount>40</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MagicalAttackSpeed">
++				<amount>30</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="PhysicalEvasion">
++				<amount>5</amount>
++				<mode>DIFF</mode>
++			</effect>
++			<effect name="MagicalEvasion">
++				<amount>5</amount>
++				<mode>DIFF</mode>
++			</effect>
++			<effect name="DamageShield">
++				<amount>10</amount>
++			</effect>
++			<effect name="HpRegen">
++				<amount>75</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MpRegen">
++				<amount>100</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="ReduceCancel">
++				<amount>-40</amount>
++				<mode>DIFF</mode>
++			</effect>
++			<effect name="Reuse">
++				<amount>-10</amount>
++				<mode>PER</mode>
++				<magicType>0</magicType>
++			</effect>
++			<effect name="Reuse">
++				<amount>-10</amount>
++				<mode>PER</mode>
++				<magicType>1</magicType>
++			</effect>
++			<effect name="MagicMpCost">
++				<amount>-22</amount>
++				<mode>PER</mode>
++				<magicType>1</magicType>
++			</effect>
++			<effect name="MagicMpCost">
++				<amount>-22</amount>
++				<mode>PER</mode>
++				<magicType>0</magicType>
++			</effect>
++			<effect name="VampiricAttack">
++				<amount>8</amount>
++				<chance>30</chance>
++			</effect>
++		</effects>
+ 	</skill>
+ 	<skill id="62086" toLevel="3" name="Fantasia Harmony - Bora">
+ 		<!-- Level 1: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">60 min.</font>. HP/ MP Recovery Rate +100%. Vampiric Rage +10%. Debilitation/ Confusion/ Obstruction/ Stupor/ Infection/ Petrification/ Pull/ Danger Zone Resistance +100. Speed +10. Skill MP Consumption -40%. Skill cooldown -25%. <font color="ECECEC"><Additional effect - Critical Stroke></font>. With a certain chance, Critical Damage for basic attacks +100% for 8 sec. when hit. The cooldown is fixed at 15 sec. -->
+ 		<!-- Level 2: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">4 h.</font>. HP/ MP Recovery Rate +100%. Vampiric Rage +10%. Debilitation/ Confusion/ Obstruction/ Stupor/ Infection/ Petrification/ Pull/ Danger Zone Resistance +100. Speed +10. Skill MP Consumption -40%. Skill cooldown -25%. <font color="ECECEC"><Additional effect - Critical Stroke></font>. With a certain chance, Critical Damage for basic attacks +100% for 8 sec. when hit. The cooldown is fixed at 15 sec. -->
+ 		<!-- Level 3: The GM is always by your side. <font color="ECECEC"><Effect></font>. <font color="A3A3A3">Duration:</font> <font color="B09B79">8 h.</font>. HP/ MP Recovery Rate +100%. Vampiric Rage +10%. Debilitation/ Confusion/ Obstruction/ Stupor/ Infection/ Petrification/ Pull/ Danger Zone Resistance +100. Speed +10. Skill MP Consumption -40%. Skill cooldown -25%. <font color="ECECEC"><Additional effect - Critical Stroke></font>. With a certain chance, Critical Damage for basic attacks +100% for 8 sec. when hit. The cooldown is fixed at 15 sec. -->
+ 		<icon>icon.skill30812</icon>
+-		<operateType>A1</operateType>
++		<operateType>A2</operateType>
++		<targetType>SELF</targetType>
++		<abnormalLevel>
++			<value level="1">8</value>
++			<value level="2">9</value>
++			<value level="3">10</value>
++		</abnormalLevel>
++		<abnormalTime>
++			<value level="1">3600</value>
++			<value level="2">14400</value>
++			<value level="3">28800</value>
++		</abnormalTime>
++		<abnormalType>BUFF_SPECIAL_CLASS</abnormalType>
++		<affectObject>FRIEND</affectObject>
++		<affectScope>SINGLE</affectScope>
++		<basicProperty>NONE</basicProperty>
++		<blockedInOlympiad>true</blockedInOlympiad>
+ 		<castRange>900</castRange>
+ 		<effectPoint>1</effectPoint>
++		<isMagic>22</isMagic>
++		<magicCriticalRate>5</magicCriticalRate>
++		<effects>
++			<effect name="HpRegen">
++				<amount>100</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="MpRegen">
++				<amount>100</amount>
++				<mode>PER</mode>
++			</effect>
++			<effect name="VampiricAttack">
++				<amount>10</amount>
++				<chance>80</chance>
++				<mode>PER</mode>
++			</effect>
++			<effect name="DefenceTrait">
++				<HOLD>100</HOLD>
++				<SLEEP>100</SLEEP>
++				<DERANGEMENT>100</DERANGEMENT>
++				<CHANGEBODY>100</CHANGEBODY>
++				<PARALYZE>100</PARALYZE>
++				<SHOCK>100</SHOCK>
++				<KNOCKBACK>100</KNOCKBACK>
++				<KNOCKDOWN>100</KNOCKDOWN>
++				<AIRBIND>100</AIRBIND>
++				<TURN_STONE>100</TURN_STONE>
++			</effect>
++			<effect name="Speed">
++				<amount>10</amount>
++				<mode>DIFF</mode>
++			</effect>
++			<effect name="MagicMpCost">
++				<amount>-40</amount>
++				<mode>PER</mode>
++				<magicType>0</magicType>
++			</effect>
++			<effect name="MagicMpCost">
++				<amount>-40</amount>
++				<mode>PER</mode>
++				<magicType>1</magicType>
++			</effect>
++			<effect name="MagicMpCost">
++				<amount>-40</amount>
++				<mode>PER</mode>
++				<magicType>3</magicType>
++			</effect>
++			<effect name="MagicMpCost">
++				<amount>-40</amount>
++				<mode>PER</mode>
++				<magicType>22</magicType>
++			</effect>
++			<effect name="Reuse">
++				<amount>-25</amount>
++				<magicType>0</magicType>
++				<mode>PER</mode>
++			</effect>
++			<effect name="Reuse">
++				<amount>-25</amount>
++				<magicType>1</magicType>
++				<mode>PER</mode>
++			</effect>
++			<effect name="Reuse">
++				<amount>-25</amount>
++				<magicType>3</magicType>
++				<mode>PER</mode>
++			</effect>
++			<effect name="Reuse">
++				<amount>-25</amount>
++				<magicType>22</magicType>
++				<mode>PER</mode>
++			</effect>
++			<effect name="TriggerSkillByDamageReceived">
++				<!-- Critical Damage Increase -->
++				<attackerType>Creature</attackerType>
++				<chance>80</chance>
++				<targetType>SELF</targetType>
++				<minDamage>300</minDamage>
++				<skillId>11569</skillId> <!-- Critical Stroke -->
++				<skillLevel>1</skillLevel>
++			</effect>
++			<effect name="DispelBySlotProbability">
++				<dispel>COCKTAIL;MULTI_BUFF;DANCE_OF_BLADESTORM;SONG_OF_CHAMPION;SONG_OF_EARTH;SONG_OF_HUNTER;SONG_OF_LIFE;SONG_OF_MEDITATION;SONG_OF_RENEWAL;SONG_OF_VENGEANCE;SONG_OF_VITALITY;SONG_OF_WARDING;SONG_OF_WATER;SONG_OF_WIND;DANCE_OF_BERSERKER;DANCE_OF_CONCENTRATION;DANCE_OF_FIRE;DANCE_OF_FURY;DANCE_OF_INSPIRATION;DANCE_OF_MYSTIC;DANCE_OF_SIREN;DANCE_OF_VAMPIRE;DANCE_OF_WARRIOR;SONG_OF_PURIFICATION;WISPERING_OF_BATTLE;SONG_OF_WINDSTORM;MOTION_OF_DEFENCE;INSTINCT;BERSERKER;PA_PD_UP;IMPROVE_SHIELD_RATE_DEFENCE_UP;SHIELD_PROB_UP;SHIELD_DEFENCE_UP;CANCEL_PROB_DOWN;MA_UP_SPECIAL</dispel>
++				<rate>100</rate>
++			</effect>
++			<effect name="BlockAbnormalSlot">
++				<slot>COCKTAIL;MULTI_BUFF;DANCE_OF_BLADESTORM;SONG_OF_CHAMPION;SONG_OF_EARTH;SONG_OF_HUNTER;SONG_OF_LIFE;SONG_OF_MEDITATION;SONG_OF_RENEWAL;SONG_OF_VENGEANCE;SONG_OF_VITALITY;SONG_OF_WARDING;SONG_OF_WATER;SONG_OF_WIND;DANCE_OF_BERSERKER;DANCE_OF_CONCENTRATION;DANCE_OF_FIRE;DANCE_OF_FURY;DANCE_OF_INSPIRATION;DANCE_OF_MYSTIC;DANCE_OF_SIREN;DANCE_OF_VAMPIRE;DANCE_OF_WARRIOR;SONG_OF_PURIFICATION;WISPERING_OF_BATTLE;SONG_OF_WINDSTORM;MOTION_OF_DEFENCE;INSTINCT;BERSERKER;PA_PD_UP;IMPROVE_SHIELD_RATE_DEFENCE_UP;SHIELD_PROB_UP;SHIELD_DEFENCE_UP;CANCEL_PROB_DOWN;MA_UP_SPECIAL</slot>
++			</effect>
++		</effects>
+ 	</skill>
+ 	<skill id="62087" toLevel="1" name="Santiago's Royal Soup - GM's Blessing">
+ 		<!-- The GM is always by your side. For 60 min., P./ M. Atk., Atk. Spd./ Casting Spd., Max HP/ MP +4%. -->
